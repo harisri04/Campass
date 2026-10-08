@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Campus Compass - a sleek frontend-only student life assistant.">
+  <title>Campus Compass — Student Life Assistant</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-mark"><i class="ri-compass-3-fill"></i></div>
+        <div>
+          <strong>Campus</strong>
+          <span>Compass</span>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <p class="nav-label">Workspace</p>
+        <button class="nav-item active" data-section="dashboard"><i class="ri-dashboard-line"></i><span>Dashboard</span></button>
+        <button class="nav-item" data-section="planner"><i class="ri-calendar-check-line"></i><span>Planner</span></button>
+        <button class="nav-item" data-section="assignments"><i class="ri-file-list-2-line"></i><span>Assignments</span></button>
+        <button class="nav-item" data-section="timetable"><i class="ri-calendar-schedule-line"></i><span>Timetable</span></button>
+        <button class="nav-item" data-section="notes"><i class="ri-sticky-note-line"></i><span>Notes</span></button>
+        <button class="nav-item" data-section="focus"><i class="ri-timer-line"></i><span>Focus Mode</span></button>
+        <button class="nav-item" data-section="exams"><i class="ri-file-list-3-line"></i><span>Exams</span></button>
+        <button class="nav-item" data-section="progress"><i class="ri-bar-chart-box-line"></i><span>Progress</span></button>
+        <button class="nav-item" data-section="academics"><i class="ri-graduation-cap-line"></i><span>GPA & Attendance</span></button>
+        <button class="nav-item" data-section="resources"><i class="ri-links-line"></i><span>Resources</span></button>
+        <button class="nav-item" data-section="stuck"><i class="ri-lightbulb-flash-line"></i><span>I'm Stuck</span></button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="mini-card">
+          <div class="mini-icon"><i class="ri-flashlight-fill"></i></div>
+          <div>
+            <strong>Small steps.</strong>
+            <span>Big progress.</span>
+          </div>
+        </div>
+        <button class="nav-item" id="settingsBtn"><i class="ri-settings-4-line"></i><span>Settings</span></button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button class="icon-btn mobile-menu" id="mobileMenu" aria-label="Open menu"><i class="ri-menu-line"></i></button>
+        <div class="breadcrumb"><span>Workspace</span><i class="ri-arrow-right-s-line"></i><strong id="pageTitle">Dashboard</strong></div>
+        <div class="top-actions">
+          <button class="icon-btn" id="themeBtn" title="Toggle theme"><i class="ri-moon-line"></i></button>
+          <button class="icon-btn notification-btn" id="notificationBtn" title="Notifications"><i class="ri-notification-3-line"></i><span></span></button>
+          <button class="avatar" id="profileBtn">S</button>
+        </div>
+      </header>
+
+      <div class="content">
+        <!-- DASHBOARD -->
+        <section class="page active" id="dashboard">
+          <div class="hero">
+            <div>
+              <div class="eyebrow"><span class="live-dot"></span> Your student command center</div>
+              <h1 id="greeting">Good morning, Student 👋</h1>
+              <p>Stay on top of classes, deadlines and your next best step.</p>
+            </div>
+            <div class="hero-date">
+              <span id="dayName">Thursday</span>
+              <strong id="fullDate">08 October 2026</strong>
+            </div>
+          </div>
+
+          <div class="stats-grid">
+            <button class="stat-card" data-section-jump="planner">
+              <div class="stat-top"><span class="stat-icon purple"><i class="ri-task-line"></i></span><i class="ri-arrow-right-up-line"></i></div>
+              <div class="stat-value" id="taskCount">0</div><div class="stat-label">Open tasks</div>
+              <div class="stat-meta" id="taskMeta">You're all caught up</div>
+            </button>
+            <button class="stat-card" data-section-jump="exams">
+              <div class="stat-top"><span class="stat-icon blue"><i class="ri-calendar-event-line"></i></span><i class="ri-arrow-right-up-line"></i></div>
+              <div class="stat-value" id="examCount">0</div><div class="stat-label">Upcoming exams</div>
+              <div class="stat-meta" id="examMeta">Add your first exam</div>
+            </button>
+            <button class="stat-card" data-section-jump="focus">
+              <div class="stat-top"><span class="stat-icon green"><i class="ri-time-line"></i></span><i class="ri-arrow-right-up-line"></i></div>
+              <div class="stat-value" id="studyMinutes">0m</div><div class="stat-label">Study this week</div>
+              <div class="stat-meta">Keep the streak alive</div>
+            </button>
+            <button class="stat-card" data-section-jump="progress">
+              <div class="stat-top"><span class="stat-icon orange"><i class="ri-medal-line"></i></span><i class="ri-arrow-right-up-line"></i></div>
+              <div class="stat-value" id="overallScore">0%</div><div class="stat-label">Academic average</div>
+              <div class="stat-meta" id="scoreMeta">Add subject scores</div>
+            </button>
+          </div>
+
+          <div class="dashboard-grid">
+            <div class="card today-card">
+              <div class="card-head">
+                <div><p class="section-kicker">Today</p><h2>Your schedule</h2></div>
+                <button class="text-btn" data-section-jump="planner">View planner <i class="ri-arrow-right-line"></i></button>
+              </div>
+              <div class="schedule-list" id="todaySchedule"></div>
+            </div>
+
+            <div class="card quick-card">
+              <div class="card-head">
+                <div><p class="section-kicker">Quick action</p><h2>What do you need?</h2></div>
+              </div>
+              <div class="quick-grid">
+                <button class="quick-action" data-section-jump="planner"><span><i class="ri-add-line"></i></span><strong>Add task</strong><small>Capture a deadline</small></button>
+                <button class="quick-action" data-section-jump="focus"><span><i class="ri-play-circle-line"></i></span><strong>Start focus</strong><small>Study distraction-free</small></button>
+                <button class="quick-action" data-section-jump="exams"><span><i class="ri-calendar-2-line"></i></span><strong>Add exam</strong><small>Never miss a date</small></button>
+                <button class="quick-action" data-section-jump="stuck"><span><i class="ri-question-mark"></i></span><strong>I'm stuck</strong><small>Get a next step</small></button>
+              </div>
+            </div>
+          </div>
+
+          <div class="dashboard-grid lower">
+            <div class="card smart-card">
+              <div class="card-head">
+                <div><p class="section-kicker">Smart study</p><h2>I have <span id="smartTimeLabel">30</span> minutes</h2></div>
+                <div class="time-pills">
+                  <button class="time-pill active" data-minutes="30">30m</button>
+                  <button class="time-pill" data-minutes="15">15m</button>
+                  <button class="time-pill" data-minutes="60">1h</button>
+                  <button class="time-pill" data-minutes="120">2h</button>
+                </div>
+              </div>
+              <div class="smart-plan" id="smartPlan"></div>
+            </div>
+
+            <div class="card quote-card">
+              <div class="quote-mark">“</div>
+              <blockquote id="quoteText">You don't need to see the whole staircase, just take the next step.</blockquote>
+              <p id="quoteAuthor">— Unknown</p>
+              <button class="icon-btn quote-refresh" id="newQuote" title="New quote"><i class="ri-refresh-line"></i></button>
+            </div>
+          </div>
+        </section>
+
+        <!-- PLANNER -->
+        <section class="page" id="planner">
+          <div class="page-heading">
+            <div><p class="section-kicker">Organize your week</p><h1>Planner</h1><p>Turn everything on your mind into a clear next action.</p></div>
+            <button class="primary-btn" id="addTaskBtn"><i class="ri-add-line"></i> Add task</button>
+          </div>
+          <div class="filter-row">
+            <div class="segmented" id="taskFilters">
+              <button class="active" data-filter="all">All</button><button data-filter="today">Today</button><button data-filter="upcoming">Upcoming</button><button data-filter="completed">Completed</button>
+            </div>
+            <div class="search-box"><i class="ri-search-line"></i><input id="taskSearch" placeholder="Search tasks..."></div>
+          </div>
+          <div class="planner-layout">
+            <div class="card">
+              <div class="card-head"><div><p class="section-kicker">Task board</p><h2 id="taskBoardTitle">All tasks</h2></div><span class="count-badge" id="visibleTaskCount">0</span></div>
+              <div class="task-list" id="taskList"></div>
+            </div>
+            <div class="card week-card">
+              <div class="card-head"><div><p class="section-kicker">This week</p><h2>Study load</h2></div></div>
+              <div class="week-bars" id="weekBars"></div>
+              <div class="legend"><span><i></i> Planned</span><span><i></i> Completed</span></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- FOCUS -->
+        <section class="page" id="focus">
+          <div class="page-heading">
+            <div><p class="section-kicker">Deep work</p><h1>Focus Mode</h1><p>One session. One task. No distractions.</p></div>
+          </div>
+          <div class="focus-layout">
+            <div class="card focus-timer-card">
+              <div class="focus-label"><span class="live-dot"></span> Focus session</div>
+              <div class="timer-ring" id="timerRing"><div><span id="timerDisplay">25:00</span><small id="timerStatus">Ready to focus</small></div></div>
+              <div class="timer-presets">
+                <button class="timer-preset active" data-duration="25">25 min</button>
+                <button class="timer-preset" data-duration="50">50 min</button>
+                <button class="timer-preset" data-duration="5">5 min break</button>
+              </div>
+              <div class="timer-controls">
+                <button class="secondary-btn" id="resetTimer"><i class="ri-restart-line"></i> Reset</button>
+                <button class="primary-btn large" id="startTimer"><i class="ri-play-fill"></i> Start focus</button>
+              </div>
+              <div class="session-note"><i class="ri-information-line"></i><span>Your completed focus time is saved locally in this browser.</span></div>
+            </div>
+            <div class="focus-side">
+              <div class="card">
+                <div class="card-head"><div><p class="section-kicker">Current task</p><h2>What are you working on?</h2></div></div>
+                <select id="focusTaskSelect" class="select-input"></select>
+                <div class="focus-tip"><span><i class="ri-lightbulb-flash-line"></i></span><div><strong>Focus tip</strong><p id="focusTip">Put your phone away and decide what “done” looks like before you start.</p></div></div>
+              </div>
+              <div class="card session-history">
+                <div class="card-head"><div><p class="section-kicker">This week</p><h2>Focus history</h2></div></div>
+                <div id="focusHistory"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- EXAMS -->
+        <section class="page" id="exams">
+          <div class="page-heading">
+            <div><p class="section-kicker">Never miss the important dates</p><h1>Exams</h1><p>Keep your deadlines visible and your preparation realistic.</p></div>
+            <button class="primary-btn" id="addExamBtn"><i class="ri-add-line"></i> Add exam</button>
+          </div>
+          <div class="exam-summary">
+            <div class="card exam-summary-card"><span class="stat-icon purple"><i class="ri-calendar-schedule-line"></i></span><div><strong id="nextExamName">No exam added</strong><span id="nextExamDays">Add an exam to start counting down.</span></div></div>
+            <div class="card exam-summary-card"><span class="stat-icon orange"><i class="ri-alarm-warning-line"></i></span><div><strong id="urgentExamText">You're clear</strong><span>Exams within the next 7 days</span></div></div>
+          </div>
+          <div class="exam-grid" id="examGrid"></div>
+        </section>
+
+        <!-- PROGRESS -->
+        <section class="page" id="progress">
+          <div class="page-heading">
+            <div><p class="section-kicker">Know where you stand</p><h1>Progress</h1><p>Track your academic performance and study consistency.</p></div>
+            <button class="primary-btn" id="addSubjectBtn"><i class="ri-add-line"></i> Add subject</button>
+          </div>
+          <div class="progress-overview">
+            <div class="card score-card"><div class="score-circle"><span id="bigAverage">0%</span></div><div><p class="section-kicker">Overall average</p><h2 id="scoreHeadline">Start tracking</h2><p id="scoreDescription">Add your subject scores to see your academic picture.</p></div></div>
+            <div class="card progress-stat"><span class="stat-icon green"><i class="ri-bookmark-check-line"></i></span><div><strong id="completedCount">0</strong><span>Tasks completed</span></div></div>
+            <div class="card progress-stat"><span class="stat-icon blue"><i class="ri-hourglass-line"></i></span><div><strong id="totalFocus">0m</strong><span>Total focus time</span></div></div>
+          </div>
+          <div class="charts-grid">
+            <div class="card chart-card"><div class="card-head"><div><p class="section-kicker">Academics</p><h2>Subject performance</h2></div></div><canvas id="subjectChart"></canvas></div>
+            <div class="card chart-card"><div class="card-head"><div><p class="section-kicker">Consistency</p><h2>Study hours</h2></div></div><canvas id="studyChart"></canvas></div>
+          </div>
+          <div class="card subject-table-card">
+            <div class="card-head"><div><p class="section-kicker">Your subjects</p><h2>Performance breakdown</h2></div></div>
+            <div class="subject-list" id="subjectList"></div>
+          </div>
+        </section>
+
+        <!-- ASSIGNMENTS -->
+        <section class="page" id="assignments">
+          <div class="page-heading">
+            <div><p class="section-kicker">YOUR WORK TO DO</p><h1>Assignments to Do</h1><p>Keep every real assignment, deadline and requirement in one place.</p></div>
+            <button class="primary-btn" id="addAssignmentBtn"><i class="ri-add-line"></i> Add assignment</button>
+          </div>
+          <div class="assignment-stats">
+            <div class="card mini-stat"><strong id="assignmentTotal">0</strong><span>Total</span></div>
+            <div class="card mini-stat"><strong id="assignmentPending">0</strong><span>Pending</span></div>
+            <div class="card mini-stat"><strong id="assignmentProgress">0</strong><span>In progress</span></div>
+            <div class="card mini-stat"><strong id="assignmentDone">0</strong><span>Completed</span></div>
+          </div>
+          <div class="filter-row assignment-toolbar">
+            <div class="segmented" id="assignmentStatusFilters"><button class="active" data-afilter="all">All</button><button data-afilter="pending">Pending</button><button data-afilter="in-progress">In Progress</button><button data-afilter="completed">Completed</button></div>
+            <select id="assignmentPriorityFilter" class="select-input"><option value="all">All priorities</option><option value="high">High</option><option value="medium">Medium</option><option value="low">Low</option></select>
+            <div class="search-box"><i class="ri-search-line"></i><input id="assignmentSearch" placeholder="Search assignments..."></div>
+          </div>
+          <div class="card"><div class="card-head"><div><p class="section-kicker">Assignment list</p><h2>What you actually need to submit</h2></div><span class="count-badge" id="assignmentVisibleCount">0</span></div><div class="assignment-list" id="assignmentList"></div></div>
+        </section>
+
+        <!-- TIMETABLE -->
+        <section class="page" id="timetable">
+          <div class="page-heading"><div><p class="section-kicker">YOUR WEEK</p><h1>Class Timetable</h1><p>Keep your classes visible alongside your study plan.</p></div><button class="primary-btn" id="addClassBtn"><i class="ri-add-line"></i> Add class</button></div>
+          <div class="timetable-grid" id="timetableGrid"></div>
+        </section>
+
+        <!-- NOTES -->
+        <section class="page" id="notes">
+          <div class="page-heading"><div><p class="section-kicker">QUICK NOTES</p><h1>Notes</h1><p>Save short study notes, reminders and ideas locally.</p></div><button class="primary-btn" id="addNoteBtn"><i class="ri-add-line"></i> Add note</button></div>
+          <div class="search-box note-search"><i class="ri-search-line"></i><input id="noteSearch" placeholder="Search notes..."></div>
+          <div class="notes-grid" id="notesGrid"></div>
+        </section>
+
+        <!-- GPA / ATTENDANCE -->
+        <section class="page" id="academics">
+          <div class="page-heading"><div><p class="section-kicker">ACADEMIC TOOLS</p><h1>GPA & Attendance</h1><p>Calculate your academic standing and monitor attendance.</p></div></div>
+          <div class="academic-tools-grid">
+            <div class="card tool-card"><div class="card-head"><div><p class="section-kicker">GPA calculator</p><h2>Semester GPA</h2></div></div><div id="gpaRows"></div><button class="secondary-btn" id="addGpaRow"><i class="ri-add-line"></i> Add subject</button><div class="calculator-result"><span>GPA</span><strong id="gpaResult">0.00</strong></div></div>
+            <div class="card tool-card"><div class="card-head"><div><p class="section-kicker">Attendance tracker</p><h2>Attendance</h2></div></div><div id="attendanceRows"></div><button class="secondary-btn" id="addAttendanceRow"><i class="ri-add-line"></i> Add subject</button><div class="calculator-result"><span>Overall attendance</span><strong id="attendanceResult">0%</strong></div></div>
+          </div>
+        </section>
+
+        <!-- RESOURCES -->
+        <section class="page" id="resources">
+          <div class="page-heading"><div><p class="section-kicker">USEFUL LINKS</p><h1>Resources</h1><p>Keep your most-used academic resources in one place.</p></div><button class="primary-btn" id="addResourceBtn"><i class="ri-add-line"></i> Add resource</button></div>
+          <div class="resources-grid" id="resourcesGrid"></div>
+        </section>
+
+        <!-- STUCK -->
+        <section class="page" id="stuck">
+          <div class="page-heading">
+            <div><p class="section-kicker">A little direction</p><h1>I'm Stuck</h1><p>Choose what's getting in your way. We'll give you one practical next step.</p></div>
+          </div>
+          <div class="stuck-grid">
+            <button class="stuck-card" data-problem="topic"><span class="stuck-icon purple"><i class="ri-book-open-line"></i></span><strong>I don't understand a topic</strong><small>Break it into smaller pieces.</small></button>
+            <button class="stuck-card" data-problem="time"><span class="stuck-icon blue"><i class="ri-time-line"></i></span><strong>I can't manage my time</strong><small>Build a realistic mini-plan.</small></button>
+            <button class="stuck-card" data-problem="assignments"><span class="stuck-icon orange"><i class="ri-stack-line"></i></span><strong>Too many assignments</strong><small>Find your highest-impact task.</small></button>
+            <button class="stuck-card" data-problem="exam"><span class="stuck-icon red"><i class="ri-alarm-warning-line"></i></span><strong>My exam is tomorrow</strong><small>Switch to smart revision.</small></button>
+            <button class="stuck-card" data-problem="career"><span class="stuck-icon green"><i class="ri-compass-discover-line"></i></span><strong>I don't know what to learn</strong><small>Choose one useful skill.</small></button>
+            <button class="stuck-card" data-problem="focus"><span class="stuck-icon pink"><i class="ri-focus-3-line"></i></span><strong>I can't concentrate</strong><small>Make the next 10 minutes easy.</small></button>
+          </div>
+          <div class="card advice-card hidden" id="adviceCard">
+            <button class="close-advice" id="closeAdvice"><i class="ri-close-line"></i></button>
+            <div class="advice-badge"><i class="ri-sparkling-2-fill"></i> Your next step</div>
+            <h2 id="adviceTitle"></h2>
+            <p id="adviceText"></p>
+            <div class="advice-actions" id="adviceActions"></div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <!-- MODALS -->
+  <div class="modal-backdrop" id="taskModal">
+    <div class="modal">
+      <div class="modal-head"><div><p class="section-kicker">Planner</p><h2 id="taskModalTitle">Add a task</h2></div><button class="icon-btn close-modal"><i class="ri-close-line"></i></button></div>
+      <form id="taskForm">
+        <input type="hidden" id="taskId">
+        <label>Task title<input id="taskTitle" required placeholder="e.g. Revise linked lists"></label>
+        <div class="form-grid"><label>Subject<input id="taskSubject" required placeholder="e.g. DSA"></label><label>Due date<input id="taskDue" type="date" required></label></div>
+        <div class="form-grid"><label>Priority<select id="taskPriority"><option value="high">High</option><option value="medium" selected>Medium</option><option value="low">Low</option></select></label><label>Estimated time<select id="taskTime"><option value="15">15 min</option><option value="30" selected>30 min</option><option value="45">45 min</option><option value="60">1 hour</option><option value="90">1.5 hours</option><option value="120">2 hours</option></select></label></div>
+        <label>Notes<textarea id="taskNotes" rows="3" placeholder="Optional details..."></textarea></label>
+        <button class="primary-btn full" type="submit">Save task</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="examModal">
+    <div class="modal">
+      <div class="modal-head"><div><p class="section-kicker">Exam tracker</p><h2>Add an exam</h2></div><button class="icon-btn close-modal"><i class="ri-close-line"></i></button></div>
+      <form id="examForm">
+        <label>Subject<input id="examSubject" required placeholder="e.g. Data Structures"></label>
+        <div class="form-grid"><label>Exam date<input id="examDate" type="date" required></label><label>Start time<input id="examTime" type="time" value="09:00"></label></div>
+        <label>Exam location<input id="examLocation" placeholder="e.g. Block A — Room 204"></label>
+        <button class="primary-btn full" type="submit">Add exam</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="subjectModal">
+    <div class="modal">
+      <div class="modal-head"><div><p class="section-kicker">Progress</p><h2>Add subject</h2></div><button class="icon-btn close-modal"><i class="ri-close-line"></i></button></div>
+      <form id="subjectForm">
+        <label>Subject name<input id="subjectName" required placeholder="e.g. Java"></label>
+        <div class="form-grid"><label>Score (%)<input id="subjectScore" type="number" min="0" max="100" required placeholder="82"></label><label>Target (%)<input id="subjectTarget" type="number" min="0" max="100" value="90" required></label></div>
+        <button class="primary-btn full" type="submit">Add subject</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="assignmentModal"><div class="modal"><div class="modal-head"><div><p class="section-kicker">Assignments</p><h2>Add assignment</h2></div><button class="icon-btn close-modal"><i class="ri-close-line"></i></button></div><form id="assignmentForm"><input type="hidden" id="assignmentId"><label>Assignment name<input id="assignmentTitle" required placeholder="e.g. Java Array Assignment"></label><div class="form-grid"><label>Subject<input id="assignmentSubject" required placeholder="e.g. DSA"></label><label>Due date<input id="assignmentDue" type="date" required></label></div><div class="form-grid"><label>Due time<input id="assignmentTime" type="time" value="23:59"></label><label>Priority<select id="assignmentPriority"><option value="high">High</option><option value="medium" selected>Medium</option><option value="low">Low</option></select></label></div><label>Status<select id="assignmentStatus"><option value="pending">Pending</option><option value="in-progress">In Progress</option><option value="completed">Completed</option></select></label><label>Description / details<textarea id="assignmentDetails" rows="4" placeholder="What exactly do you need to complete or submit?"></textarea></label><button class="primary-btn full" type="submit">Save assignment</button></form></div></div>
+  <div class="modal-backdrop" id="assignmentDetailModal"><div class="modal"><div class="modal-head"><div><p class="section-kicker">Assignment details</p><h2 id="assignmentDetailTitle"></h2></div><button class="icon-btn close-modal"><i class="ri-close-line"></i></button></div><div id="assignmentDetailBody"></div></div></div>
+  <div class="modal-backdrop" id="classModal"><div class="modal"><div class="modal-head"><div><p class="section-kicker">Timetable</p><h2>Add class</h2></div><button class="icon-btn close-modal"><i class="ri-close-line"></i></button></div><form id="classForm"><label>Subject / class<input id="classSubject" required placeholder="e.g. Data Structures"></label><div class="form-grid"><label>Day<select id="classDay"><option>Monday</option><option>Tuesday</option><option>Wednesday</option><option>Thursday</option><option>Friday</option><option>Saturday</option></select></label><label>Time<input id="classTime" required placeholder="10:00 AM - 11:00 AM"></label></div><label>Room / faculty<input id="classRoom" placeholder="e.g. Block A • Room 204"></label><button class="primary-btn full" type="submit">Save class</button></form></div></div>
+  <div class="modal-backdrop" id="noteModal"><div class="modal"><div class="modal-head"><div><p class="section-kicker">Notes</p><h2>Add note</h2></div><button class="icon-btn close-modal"><i class="ri-close-line"></i></button></div><form id="noteForm"><input type="hidden" id="noteId"><label>Title<input id="noteTitle" required placeholder="e.g. Java arrays"></label><label>Note<textarea id="noteBody" rows="7" required placeholder="Write your note..."></textarea></label><button class="primary-btn full" type="submit">Save note</button></form></div></div>
+  <div class="modal-backdrop" id="resourceModal"><div class="modal"><div class="modal-head"><div><p class="section-kicker">Resources</p><h2>Add resource</h2></div><button class="icon-btn close-modal"><i class="ri-close-line"></i></button></div><form id="resourceForm"><label>Resource name<input id="resourceName" required placeholder="e.g. DSA Notes"></label><label>Category<input id="resourceCategory" placeholder="Study / Tools / College"></label><label>Link<input id="resourceUrl" type="url" required placeholder="https://..."></label><button class="primary-btn full" type="submit">Save resource</button></form></div></div>
+
+  <div class="login-screen" id="loginScreen"><div class="login-card"><div class="brand-mark"><i class="ri-compass-3-fill"></i></div><p class="section-kicker">STUDENT PRODUCTIVITY HUB</p><h1>Welcome to Campus Compass</h1><p>Sign in to continue to your student workspace.</p><form id="loginForm"><label>Name<input id="loginName" required placeholder="Your name"></label><label>Email<input id="loginEmail" type="email" required placeholder="you@example.com"></label><button class="primary-btn full" type="submit">Enter Campus Compass <i class="ri-arrow-right-line"></i></button></form><small>Frontend-only demo • no account is sent to a server.</small></div></div>
+
+  <div class="toast" id="toast"><i class="ri-checkbox-circle-fill"></i><span>Saved</span></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
